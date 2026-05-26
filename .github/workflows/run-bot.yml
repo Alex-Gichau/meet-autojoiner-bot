@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          # Removed the cache line from here to bypass lockfile checking
+          # Cache config removed to bypass missing package-lock.json errors
 
       - name: Install Application Dependencies
         run: npm install
