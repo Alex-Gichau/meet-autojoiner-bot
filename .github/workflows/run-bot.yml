@@ -1,0 +1,30 @@
+name: Google Meet Bot Runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      meet_url:
+        description: 'Paste the Google Meet URL to Join'
+        required: true
+        type: string
+
+jobs:
+  launch-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Application Dependencies
+        run: npm install
+
+      - name: Launch Headless Engine and Join Call
+        env:
+          MEET_URL: ${{ github.event.inputs.meet_url }}
+        run: node bot.js
